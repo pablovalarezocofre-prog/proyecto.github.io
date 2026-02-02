@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego de números</title>
+<link rel="stylesheet" href="./Inicio_files/style.css">
+</head>
+
+<body>
+
+  <!-- AUDIO DE FONDO -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="./Sonidos/sinicio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <script>
+    document.addEventListener("click", function () {
+      const audio = document.getElementById("musicaFondo");
+      audio.play();
+    }, { once: true });
+  </script>
+
+
+
+
+<!-- ENCABEZADO -->
+<header style="background-color: #134068; padding: 15px 30px; display: flex; align-items: center; gap: 30px;">
+  <img src="./Imagenes/LOGO.png" alt="Escudo UNL" style="height: 80px;">
+  <img src="./Imagenes/Universidad-Nacional-de-Loja-UNL.png" alt="Nombre Universidad" style="height: 50px;">
+  <img src="./Imagenes/Imagen1 UNL.png" alt="UNL" style="height: 60px;">
+  <h2 style="height: 50px; text-align: left; color:white;">
+    CARRERA DE PEDAGOGÍA DE LAS CIENCIAS<br>
+    EXPERIMENTALES INFORMÁTICA
+  </h2>
+</header>
+
+<!-- MENÚ -->
+<nav>
+  <a href="Inicio.html">Inicio</a>  
+  <a href="Juegos.html">Recursos</a>
+  <a href="Videos.html">Videos</a>
+</nav>
+
+<h1 style="text-align:center;">Juego 01: Encuentra el número</h1>
+
+<!-- CONTENEDOR DEL JUEGO -->
+<div style="width:100%; max-width:1100px; margin:20px auto; padding:20px;">
+
+<!-- ====== JUEGO (SIN MODIFICAR ESTILO) ====== -->
+
+<style>
+  body {
+    background-color: #dff3fb;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  #numero {
+    font-size: 80px;
+    color: #e63946;
+    margin: 20px;
+    font-weight: bold;
+  }
+
+  .opciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 400px;
+    margin: auto;
+  }
+
+  button {
+    font-size: 32px;
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: #4ea8de;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #1d6fa5;
+  }
+
+  #mensaje {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #2a9d8f;
+  }
+
+  .familias {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .familias button {
+    background-color: #f4a261;
+    font-size: 26px;
+  }
+
+  .familias button:hover {
+    background-color: #e76f51;
+  }
+</style>
+
+<div class="contenedor">
+
+  <div>
+    <div id="numero"></div>
+    <div class="opciones" id="opciones"></div>
+    <p id="mensaje"></p>
+  </div>
+
+  <div class="familias">
+    <button onclick="cambiarFamilia(10)">Familia 10</button>
+    <button onclick="cambiarFamilia(20)">Familia 20</button>
+    <button onclick="cambiarFamilia(30)">Familia 30</button>
+    <button onclick="cambiarFamilia(40)">Familia 40</button>
+    <button onclick="cambiarFamilia(50)">Familia 50</button>
+  </div>
+
+</div>
+
+<script>
+  let inicio = 10;
+  let fin = 19;
+  let numeroActual = inicio;
+
+  function cambiarFamilia(base) {
+    inicio = base;
+    fin = base + 9;
+    numeroActual = inicio;
+    nuevoJuego();
+  }
+
+  function nuevoJuego() {
+    document.getElementById("mensaje").textContent = "";
+
+    if (numeroActual > fin) {
+      document.getElementById("numero").textContent = "🎉";
+      document.getElementById("mensaje").textContent =
+        "¡Excelente! Terminaste esta familia ⭐";
+      document.getElementById("opciones").innerHTML = "";
+      return;
+    }
+
+    document.getElementById("numero").textContent = numeroActual;
+
+    let opciones = [numeroActual];
+
+    while (opciones.length < 6) {
+      let n = Math.floor(Math.random() * (fin - inicio + 1)) + inicio;
+      if (!opciones.includes(n)) {
+        opciones.push(n);
+      }
+    }
+
+    opciones.sort(() => Math.random() - 0.5);
+
+    const contenedor = document.getElementById("opciones");
+    contenedor.innerHTML = "";
+
+    opciones.forEach(num => {
+      const btn = document.createElement("button");
+      btn.textContent = num;
+      btn.onclick = () => verificar(num);
+      contenedor.appendChild(btn);
+    });
+  }
+
+  function verificar(num) {
+    if (num === numeroActual) {
+      document.getElementById("mensaje").textContent = "¡Muy bien! ⭐";
+      numeroActual++;
+      setTimeout(nuevoJuego, 1000);
+    } else {
+      document.getElementById("mensaje").textContent = "Inténtalo otra vez 😊";
+    }
+  }
+
+  nuevoJuego();
+</script>
+
+<!-- ====== FIN DEL JUEGO ====== -->
+
+</div>
+
+<!-- PIE DE PÁGINA -->
+<footer style="background-color: #134068; color: white; padding: 5px 10px; font-family: Arial, sans-serif;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+    <div style="flex: 1 1 100px; text-align: center; margin-bottom: 20px;">
+      <img src="./Imagenes/Imagen1 UNL.png" alt="Universidad Nacional de Loja" style="max-width: 20%; height: auto;">
+    </div>
+
+    <div style="flex: 1 1 100px; font-size: 14px; line-height: 1.8;">
+      <strong>Desarrollado por:</strong> Pablo Valarezo Cofre <br>
+      <strong>Carrera:</strong> Pedagogía de las Ciencias Experimentales Informática <br>
+      <strong>Semestre:</strong> Sexto ciclo <br>
+      <strong>Docente:</strong> Mgs. Stefani Bravo
+    </div>
+  </div>
+
+  <div style="text-align:center; font-size:12px; margin-top:20px; color:#aaa;">
+    © 2025 Universidad Nacional de Loja. Todos los derechos reservados.
+  </div>
+</footer>
+
+</body>
+</html>

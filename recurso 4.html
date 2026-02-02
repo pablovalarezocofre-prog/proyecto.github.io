@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Juego – Oraciones por fonema</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    background-color: #f1f9f9; 
+    margin: 0; 
+    padding: 0; 
+    text-align: center; 
+  }
+  header { 
+    background-color: #134068; 
+    padding: 15px 30px; 
+    display: flex; 
+    align-items: center; 
+    gap: 30px; 
+    color: white; 
+  }
+  header img { height: 60px; }
+  header h2 { text-align: left; font-size: 20px; }
+
+  /* NAV alineado a la izquierda */
+  nav { 
+    background-color: #457b9d; 
+    display: flex; 
+    justify-content: flex-start; /* alineación izquierda */
+    gap: 20px; 
+    padding: 10px 30px; 
+  }
+  nav a { 
+    color: white; 
+    text-decoration: none; 
+    font-weight: bold; 
+    font-size: 16px; 
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  nav a:hover { 
+    background-color: #1f4960; 
+    text-decoration: none; 
+  }
+
+  h1 { color: #134068; margin-top: 20px; }
+  p { font-size: 18px; color: #134068; }
+  #oracion { font-size: 28px; color: #e76f51; margin: 20px 0; }
+
+  .contenedor-oracion { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+  .caja {
+    width: 120px; height: 50px; border: 2px dashed #2a9d8f; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+    color: #134068; background-color: white; transition: background-color 0.3s, transform 0.2s;
+  }
+  .caja.correcta { background-color: #2a9d8f; color: white; transform: scale(1.1); }
+  .palabra {
+    display: inline-block; padding: 10px 20px; margin: 10px;
+    background-color: #2a9d8f; color: white; border-radius: 12px;
+    cursor: grab; font-size: 20px;
+  }
+  #mensaje { font-size: 24px; margin-top: 20px; color: #457b9d; }
+  button { margin-top: 15px; font-size: 20px; padding: 10px 20px; border-radius: 12px; border: none; background-color: #f4a261; cursor: pointer; color: white; font-weight: bold; }
+  button:hover { background-color: #e76f51; }
+
+  footer { background-color: #134068; color: white; padding: 10px 20px; font-size: 14px; }
+  footer img { max-width: 20%; height: auto; }
+  footer div { margin-bottom: 10px; }
+
+  .familia-btn { margin: 5px; font-size: 18px; padding: 8px 15px; border-radius: 10px; border: none; background-color: #2a9d8f; color: white; cursor: pointer; }
+  .familia-btn:hover { background-color: #1f776d; }
+</style>
+</head>
+<body>
+
+<!-- AUDIO DE FONDO -->
+<audio id="musicaFondo" autoplay loop>
+  <source src="./Sonidos/sinicio.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
+</audio>
+
+<script>
+document.addEventListener("click", function () {
+  const audio = document.getElementById("musicaFondo");
+  audio.play();
+}, { once: true });
+</script>
+
+<header>
+  <img src="./Imagenes/LOGO.png" alt="Escudo UNL">
+  <img src="./Imagenes/Universidad-Nacional-de-Loja-UNL.png" alt="Nombre Universidad">
+  <img src="./Imagenes/Imagen1 UNL.png" alt="UNL">
+  <h2>CARRERA DE PEDAGOGÍA DE LAS CIENCIAS<br>EXPERIMENTALES INFORMÁTICA</h2>
+</header>
+
+<!-- Navegación -->
+<nav>
+  <a href="Inicio.html">Inicio</a>
+  <a href="Juegos.html">Juegos</a>
+  <a href="Videos.html">Videos</a>
+</nav>
+
+<h1>Juego: Oraciones por fonema</h1>
+<p>Selecciona un fonema y forma las oraciones correctamente 😊</p>
+
+<div>
+  <button class="familia-btn" onclick="seleccionarFamilia('M')">M</button>
+  <button class="familia-btn" onclick="seleccionarFamilia('S')">S</button>
+  <button class="familia-btn" onclick="seleccionarFamilia('L')">L</button>
+  <button class="familia-btn" onclick="seleccionarFamilia('P')">P</button>
+</div>
+
+<div id="oracion">Oración: </div>
+<div class="contenedor-oracion" id="cajas"></div>
+<div id="palabras" class="contenedor-oracion"></div>
+<p id="mensaje"></p>
+<button onclick="siguienteOracion()" id="btnSiguiente" style="display:none;">Siguiente Oración</button>
+
+<audio id="aplausos"><source src="aplausos.mp3" type="audio/mpeg"></audio>
+
+<script>
+// --- Script del juego (igual que antes) ---
+const familias = {
+  M: [
+    { texto:"MI MAMA ME AMA", palabras:["MI","MAMA","ME","AMA","MA","ME","MI"] },
+    { texto:"MI MONO COME", palabras:["MI","MONO","COME","MA","ME","MI"] },
+    { texto:"MI MESA ES LINDA", palabras:["MI","MESA","ES","LINDA","MA","ME","MI"] }
+  ],
+  S: [
+    { texto:"SOY SU AMIGO", palabras:["SOY","SU","AMIGO","SA","SE","SI"] },
+    { texto:"LA SALA ES LIMPIA", palabras:["LA","SALA","ES","LIMPIA","SA","SE","SI"] },
+    { texto:"SALTO EL SUELO", palabras:["SALTO","EL","SOL","SA","SUELO","SI"] }
+  ],
+  L: [
+    { texto:"LA LUNA ES LUZ", palabras:["LA","LUNA","ES","LUZ","LE","LI","LO"] },
+    { texto:"LO QUE LEO", palabras:["LO","QUE","LEO","LA","LE","LI"] },
+    { texto:"LEO LIBROS LINDOS", palabras:["LEO","LIBROS","LINDOS","LA","LE","LI"] }
+  ],
+  P: [
+    { texto:"PAPA DUERME POCO", palabras:["PAPA","PELEA","POCO","DUERME","PE","PI"] },
+    { texto:"LA PELICULA PERFECTA", palabras:["PIENSO","PELICULA","PERFECTA","LA","PE","PI"] },
+    { texto:"PASEA POR EL PARQUE", palabras:["PASEA","POR","PARQUE","PA","EL","PI"] }
+  ]
+};
+
+let oracionesActuales = [];
+let indiceOracion = 0;
+let cajas = [];
+
+function seleccionarFamilia(familia) {
+  oracionesActuales = familias[familia];
+  indiceOracion = 0;
+  cargarOracion();
+}
+
+function cargarOracion() {
+  document.getElementById("mensaje").textContent = "";
+  document.getElementById("btnSiguiente").style.display = "none";
+  document.getElementById("cajas").innerHTML = "";
+  document.getElementById("palabras").innerHTML = "";
+
+  const oracion = oracionesActuales[indiceOracion];
+  document.getElementById("oracion").textContent = "Oración: " + oracion.texto;
+
+  // Crear cajas
+  cajas = [];
+  oracion.texto.split(" ").forEach((pal, i) => {
+    const div = document.createElement("div");
+    div.className = "caja";
+    div.dataset.index = i;
+    div.dataset.correcta = pal;
+    div.addEventListener("dragover", e => e.preventDefault());
+    div.addEventListener("drop", e => soltar(e, div));
+    document.getElementById("cajas").appendChild(div);
+    cajas.push(div);
+  });
+
+  // Palabras arrastrables
+  const opciones = [...oracion.palabras].sort(() => Math.random() - 0.5);
+  const contenedorPalabras = document.getElementById("palabras");
+  opciones.forEach(pal => {
+    const div = document.createElement("div");
+    div.className = "palabra";
+    div.textContent = pal;
+    div.draggable = true;
+    div.addEventListener("dragstart", e => e.dataTransfer.setData("text", pal));
+    contenedorPalabras.appendChild(div);
+  });
+}
+
+function soltar(e, caja) {
+  e.preventDefault();
+  const palabra = e.dataTransfer.getData("text");
+  if (!palabra) return;
+
+  if (palabra === caja.dataset.correcta) {
+    caja.textContent = palabra;
+    caja.classList.add("correcta");
+    verificarOracion();
+  } else {
+    document.getElementById("mensaje").textContent = "¡Palabra incorrecta! Intenta otra 😊";
+  }
+}
+
+function verificarOracion() {
+  const completa = cajas.every(c => c.textContent === c.dataset.correcta);
+  if (completa) {
+    document.getElementById("mensaje").textContent = "¡Muy bien! ⭐";
+    document.getElementById("btnSiguiente").style.display = "inline-block";
+    document.getElementById("aplausos").play();
+  } else {
+    document.getElementById("mensaje").textContent = "¡Sigue formando la oración!";
+  }
+}
+
+function siguienteOracion() {
+  indiceOracion++;
+  if(indiceOracion >= oracionesActuales.length){
+    document.getElementById("mensaje").textContent = "¡Terminaste todas las oraciones de esta familia! 🎉";
+    document.getElementById("btnSiguiente").style.display = "none";
+    document.getElementById("cajas").innerHTML = "";
+    document.getElementById("palabras").innerHTML = "";
+  } else {
+    cargarOracion();
+  }
+}
+</script>
+
+<footer>
+  <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <img src="./Imagenes/Imagen1 UNL.png" alt="Universidad Nacional de Loja">
+    <div style="text-align:left;">
+      <strong>Desarrollado por:</strong> Pablo Valarezo Cofre <br>
+      <strong>Carrera:</strong> Pedagogía de las Ciencias Experimentales Informática <br>
+      <strong>Semestre:</strong> Sexto ciclo <br>
+      <strong>Docente:</strong> Mgs. Stefani Bravo
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:10px; color:#aaa;">
+    © 2025 Universidad Nacional de Loja. Todos los derechos reservados.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Video: Los Sonidos de las Letras</title>
+  <link rel="stylesheet" href="./Inicio_files/style.css">
+  <style>
+    /* --- Estilos generales --- */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f7fa; /* azul muy claro de fondo */
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #134068;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    header h2 {
+      font-size: 1.8em;
+      color: white;
+      text-align: left;
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-start;
+      gap: 15px;
+      padding: 10px 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #134068;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #ffcc80;
+    }
+
+    h1 {
+      text-align: center;
+      color: #134068;
+      margin-top: 30px;
+    }
+
+    /* --- Contenedor de contenido --- */
+    .video-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #009688; /* verde azulado para resaltar */
+      border-radius: 15px;
+      color: #f5f5dc; /* texto beige */
+      box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+    }
+
+    .video-text {
+      flex: 1 1 350px;
+      padding: 20px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .video-text h2 {
+      margin-top: 0;
+      color: #ffe082;
+    }
+
+    .video-text p {
+      margin-bottom: 15px;
+    }
+
+    .video-text button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff9800;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .video-text button:hover {
+      transform: scale(1.05);
+      background-color: #fb8c00;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #134068;
+      color: white;
+      padding: 15px 30px;
+      font-family: Arial, sans-serif;
+    }
+
+    footer img {
+      max-width: 20%;
+      height: auto;
+    }
+
+    footer div {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .video-section {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUDIO DE FONDO -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="./Sonidos/sinicio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <script>
+    document.addEventListener("click", function () {
+      const audio = document.getElementById("musicaFondo");
+      audio.play();
+    }, { once: true });
+  </script>
+
+
+  <!-- Encabezado -->
+  <header>
+    <img src="./Imagenes/LOGO.png" alt="Escudo UNL" style="height: 80px;">
+    <img src="./Imagenes/Universidad-Nacional-de-Loja-UNL.png" alt="Nombre Universidad" style="height: 50px;">
+    <img src="./Imagenes/Imagen1 UNL.png" alt="UNL" style="height: 60px;">
+    <h2>
+      CARRERA DE PEDAGOGÍA DE LAS CIENCIAS<br>
+      EXPERIMENTALES INFORMÁTICA
+    </h2>
+  </header>
+
+  <!-- Navegación -->
+  <nav>
+    <a href="Inicio.html">Inicio</a>  
+    <a href="Juegos.html">Recursos</a>
+    <a href="Videos.html">Videos</a>
+  </nav>
+
+  <!-- Sección de video -->
+  <h1>Recursos Audio Visuales</h1>
+  <div class="video-section">
+    <div class="video-text">
+      <h2>🎵 Aprendamos los sonidos</h2>
+      <p>Este video te ayudará a reconocer los sonidos de las letras de manera divertida e interactiva.</p>
+      <p>Observa atentamente y repite los sonidos para mejorar tu lectura y pronunciación.</p>
+      <button onclick="window.open('https://www.youtube.com/watch?v=2WyxPFR4XwA','_blank')">
+        Ver VIDEO
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+      <div style="flex: 1 1 100px; text-align: center; margin-bottom: 20px;">
+        <img src="./Imagenes/Imagen1 UNL.png" alt="Universidad Nacional de Loja">
+      </div>
+      <div style="flex: 1 1 100px; font-size: 14px; line-height: 1.8;">
+        <strong>Desarrollado por:</strong> Pablo Valarezo Cofre <br>
+        <strong>Carrera de:</strong> Pedagogía en Informática Educativa<br>
+        <strong>Semestres:</strong> Sexto ciclo<br>
+        <strong>Docente:</strong> Mgs. Bravo Stefani<br>
+      </div>
+    </div>
+    <div style="text-align: center; font-size: 12px; margin-top: 20px; color: #aaa;">
+      © 2025 Universidad Nacional de Loja. Todos los derechos reservados.
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Inicio</title>
+  <link rel="stylesheet" href="./Inicio_files/style.css">
+</head>
+<body>
+  <!-- AUDIO DE FONDO -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="./Sonidos/sinicio.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <script>
+    document.addEventListener("click", function () {
+      const audio = document.getElementById("musicaFondo");
+      audio.play();
+    }, { once: true });
+  </script>
+
+
+
+  <!-- Encabezado con logos -->
+ <header style="background-color: #134068; padding: 15px 30px; display: flex; align-items: center; gap: 30px;">
+  <img src="./Imagenes/LOGO.png" alt="Escudo UNL" style="height: 80px;">
+  <img src="./Imagenes/Universidad-Nacional-de-Loja-UNL.png" alt="Nombre Universidad" style="height: 50px;">
+  <img src="./Imagenes/Imagen1 UNL.png" alt="UNL" style="height: 60px;">
+  <h2 style="height: 50px; text-align: left;">
+    CARRERA DE PEDAGOGÍA DE LAS CIENCIAS<br>
+    EXPERIMENTALES INFORMÁTICA
+  </h2>
+</header>
+   <nav>
+    <a href="Inicio.html">Inicio</a>  
+    <a href="Juegos.html">Recursos</a>
+    <a href="Videos.html">Videos</a>
+ 
+  </div>
+  </nav>
+
+
+
+  <h1 style=" text-align: center;"> Juego 01: NOMBRE DEL JUEGO</h1>
+  <div style="width: 100%; max-width: 1000px; margin: 10px auto 0 auto;;align-items: center; box-shadow: 0 0px 0px 0 rgba(0,0,0,0.5); overflow: hidden; border-radius: 0px;">
+  <iframe width="1000" height="615" src="https://www.minijuegos.com/juego/fireboy-and-watergirl-the-forest-temple" title="Juego01" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+</div>
+
+
+
+
+
+
+<footer style="background-color: #134068; color: white; padding: 5px 10px; font-family: Arial, sans-serif;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+    
+    <!-- Imagen institucional -->
+    <div style="flex: 1 1 100px; text-align: center; margin-bottom: 20px;">
+      <img src="./Imagenes/Imagen1 UNL.png" alt="Universidad Nacional de Loja" style="max-width: 20%; height: auto;">
+    </div>
+    <!-- Información de contacto -->
+    <div style="flex: 1 1 100px; font-size: 14px; line-height: 1.8;">
+      	<strong>Desarrollado por:</strong>Pablo Valarezo Cofre <br>
+      	<strong>Carrera de:</strong>Pedagogía de las Ciencias Experimentales Informática<br>
+      	<strong>Semestres:</strong>Sexto ciclo<br>
+      	<strong>Docente:</strong>Mgs. Stefani Bravo <br>
+    </div>
+  </div>
+
+  <div style="text-align: center; font-size: 12px; margin-top: 20px; color: #aaa;">
+    © 2025 Universidad Nacional de Loja. Todos los derechos reservados.
+  </div>
+</footer>
+
+</body></html>
